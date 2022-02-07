@@ -1,0 +1,7 @@
+if it's hot
+    It's a hot day
+    Drink plenty of water
+otherwise if it's cold
+    wear warm clothes
+otherwise
+    it's a lovely day

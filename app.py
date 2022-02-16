@@ -36,3 +36,14 @@ print("----------------------Solving the question above-------------")
 name = input("What is your name?: ")
 favourite_color = input("What is your favourite color?:")
 print(name+" likes "+favourite_color)
+
+#type conversion in python
+
+birth_year = input('Birth-Year: ')
+#age = 2022 - birth_year
+
+"""this provides a error ----> unsupported operand type(s) for -: 'int' and 'str'"""
+# to avoid this error following should be done
+age = 2022 - int(birth_year)
+print(type(age))
+print(age)

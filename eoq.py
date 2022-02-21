@@ -1,42 +1,36 @@
 import math
-annual_requirement = float(input("please insert annual requirement / consumption / usage: "))
-order_cost = float(input("please insert order cost per unit: "))
-cost_per_unit = float(input("please insert cost per unit: "))
-percent_of_order_cost = float(input("please insert percentage of order cost per unit(like 10,20): "))
-
-if annual_requirement is None:
-    global user_press
-    user_press == int(input("press 1 for EOQ and 2 for Total cost at EOQ: "))
-    if user_press == 1:
-        global eoq
-        eoq = float(input("Insert EOQ: "))
-    elif user_press == 2:
-        global total_cost_eoq
-        total_cost_eoq = float(input("Insert Total cost at EOQ: "))
-    else:
-        print("*******Either annual requirement / EOQ / Total cost at EOQ should be provided********")
-        print("______________________________________________EXITING________________________")
-        quit()
-else:
-    print("----------Calculating Carrying cost per order---------------")
-    global carry_cost
-    costperunit = 1.0
-    if order_cost is None:
-        print("setting order cost default to Rs. 100")
-        ordercost = float(100)
-    else:
-        ordercost = float(order_cost)
-    if cost_per_unit is not None:
-        costperunit = float(cost_per_unit)
-
-    carry_cost = float((float(costperunit)/100.0)*float(percent_of_order_cost))
-    print("Carrying cost: "+str(carry_cost))
-    print("-----------Calculating EOQ---------------")
-    eoq = math.sqrt((2*int(annual_requirement)*int(order_cost))/carry_cost)
-    print("value of EOQ is : "+str(eoq)+" units")
+annual_requirement = input("please insert annual requirement / consumption / usage: ")
+order_cost = input("please insert order cost per unit: ")
+cost_per_unit = input("please insert cost per unit: ")
+percent_of_carry_cost = input("please insert percentage of order cost per unit(like 10,20): ")
+def carrycostcalc(costperunit,percent):
+    return (costperunit/100)*percent
+def eoqcalculator(annualrequirement,ordercost,costperunit,percentofcarrycost):
+    print("---------------------------Calculating the value of carrying cost-------------------------------")
+    carrycost = carrycostcalc(costperunit,percentofcarrycost)
+    print("---------------------------Carrying cost (c) = Rs."+str(carrycost)+"------------------------------")
+    print("---------------------------Calculating the value of EOQ-------------------------------")
+    eoq = math.sqrt((2*annualrequirement*ordercost)/carrycost)
+    print("---------------------------Economic Order Quantity (EOQ) = " + str(round(eoq)) + "------------------------------")
+def annualrequirementcalculator(eoq,ordercost,costperunit,percentofcarrycost):
+    carrycost = carrycostcalc(costperunit,percentofcarrycost)
+    leftsidevalue = ((eoq ** 2)/carrycost)
+    rightsidevalue = (2*ordercost)
+    annualrequirement = leftsidevalue / rightsidevalue
+    print(">>>>>>>>>------------------Annual requirement: "+str(round(annualrequirement))+"---------------------------------<<<<<<<<<<<<<<<<")
 
 
-
-
-
-
+if not annual_requirement and not order_cost and not cost_per_unit and not percent_of_carry_cost:
+    print("**********************************************************************************************************************")
+    print("*****************-----------------------------Assigning default value to all-----------------------------*************")
+    print("***********************************************************************************************************************")
+    print("---------------------------Annual Requirements: 100000 units------------------------------")
+    print("---------------------------Order cost (o): Rs. 100-------------------------------------------------")
+    print("---------------------------Cost per unit: Rs. 1")
+    print("----------------------------percent of carry cost: 10%-------------------------------------------")
+    eoqcalculator(100000,100,1,10)
+elif annual_requirement and order_cost and cost_per_unit and percent_of_carry_cost:
+    eoqcalculator(float(annual_requirement),float(order_cost),float(cost_per_unit),float(percent_of_carry_cost))
+elif not annual_requirement and order_cost and cost_per_unit and percent_of_carry_cost:
+    eoq = float(input("Insert EOQ: "))
+    annualrequirementcalculator(eoq,float(order_cost),float(cost_per_unit),float(percent_of_carry_cost))

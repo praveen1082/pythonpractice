@@ -1,6 +1,7 @@
 numbers = [5, 2, 3, 7, 4]
 numbers.append(20)
-print(numbers)
+print(f"ashddghagduydgfhjasdukafgdsgfjhdsgk {len(numbers)}")
+print(len(numbers))
 #numbers.clear()
 print(numbers)
 numbers.insert(0, 29)

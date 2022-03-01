@@ -5,10 +5,12 @@ email_type = ""
 occured = 1
 emails = []
 result_data = {}
-try:
-    text = open('websiteData.txt').read().replace('\n',' ')
-except UnicodeDecodeError:
-    text = """Get 50% off on every purchase. contact marketing team at market@qq.com. Find all your linkedin
+
+# text = open("websiteData.txt", encoding="utf-8").read()
+
+# Remove the comment from above text if you want to test output with website.txt and comment the text variable
+# along with string literal below
+text = """Get 50% off on every purchase. contact marketing team at market@qq.com. Find all your linkedin
     contacts for free, jeff.peterson@b2bsearch.com. qq.com partnership program apply at market@qq.com"""
 
 # storing each word in string and finding the pattern of email and if found all emails will be stored in emails

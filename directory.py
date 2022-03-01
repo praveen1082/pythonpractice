@@ -8,5 +8,7 @@ path = Path("ecommerce1")
 # print(path.mkdir())
 #print(path.rmdir())
 path = Path()
-for file in path.glob("*.py"):
+for file in path.glob("*"):
     print(file)
+
+
